@@ -36,12 +36,13 @@ class InstructorController extends Controller
     }
     public function store_alumno(Request $request)
     {
-        $instructor = Instructor::create($request->all());
-        return response()->json($instructor);
+        $alumno = Alumno::create($request->all());
+        return response()->json($alumno);
 
 
         //agregar el crear usuario 
     }
+  
 
     public function store_alumno_archivo(Request $request)
     {
