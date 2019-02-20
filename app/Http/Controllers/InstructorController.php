@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Instructor;
 use App\Alumno;
+use \Excel;
+use App\Http\Requests\ExcelRequest;
 
 class InstructorController extends Controller
 {
@@ -11,58 +13,62 @@ class InstructorController extends Controller
     public function allinstructor()
     {
         return Instructor::all();
+        //return $instructor->append('is_admin')->toArray();
     }
     public function allAlumno()
     {
         return Alumno::all();
     }
 
-    public function showInstructor(Instructor $instructor)
+    public function showInstructor($id)
     {
-        return $instructor;
+        return $instructor=Instructor::findOrFail($id)->append('is_admin')->toArray();
     }
 
-    public function showAlumno(Alumno $alumno)
+    public function showAlumno($id)
     {
-        return $alumno;
+        return $alumno=Alumno::findOrFail($id);
     }
 
     public function store_instructor(Request $request)
     {
         $instructor = Instructor::create($request->all());
-        return response()->json($instructor);
+        return response()->json('Se agrego correctamente');
 
         //agregar el crear usuario 
     }
     public function store_alumno(Request $request)
     {
         $alumno = Alumno::create($request->all());
-        return response()->json($alumno);
+        return response()->json('Se agrego correctamente');
 
 
         //agregar el crear usuario 
     }
   
 
-    public function store_alumno_archivo(Request $request)
+    public function import_alumno_archivo()
     {
-       /* $archivo=array();
-        $nombre=$request->file('archivo')->getClientOriginalName();
-        
-        foreach(nombre as $linea) {
-            $archivo[] = $line;
-           }
-        
-        $alumno = alumno::create([
-            'clave'->$archivo[0];
-            'nombre'->$archivo[1];
-            'apellidos'->$archivo[2];
-            'rol'->$archivo[3];
-            'id_user'$archivo[4];
-            ]);
-        
-        return back()
-        ->with('msj','se guardo correctamente');*/
+       // $archivo_array = array();
+      
+        \Excel::load('\storage\app\public\ejemplo.xlsx', function($reader) 
+        {
+            return $archivo=$reader->get();
+
+           /* $archivo->each(function($columna) {
+    
+                $alumno = new Alumno;
+                $alumno->clave = $columna->clave;
+                $alumno->nombre = $columna->nombre;
+                $alumno->apellidos = $columna->apellidos;
+                $alumno->rol = $columna->rol;
+                $id_user->rol = $columna->id_user;
+                $alumno->save();
+            });*/
+
+        });
+            
+    
     }
     public function update_instructor(Request $request, Instructor $instructor)
     {

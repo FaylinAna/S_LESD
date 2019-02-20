@@ -13,7 +13,7 @@ class AlumnoController extends Controller
     {
         return $alumno;
     }
-
+    //actualizar perfil
     public function update_alumno(Request $request, Alumno $alumno)
     {
         $alumno->update($request->all());

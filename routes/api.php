@@ -29,13 +29,28 @@ Route::get('/alumno/practica/{id}/getImages','AlumnoController@getImages');
 Route::get('/alumno/practica/{id}/getFiles','AlumnoController@getFiles');
 
 //
+  // Rutas con el prefijo api/admin
+
+Route::group(['prefix' => 'admin'], function()
+{
+    Route::get('instructor', 'InstructorController@allinstructor');//muetra los datos del alumno
+    Route::get('alumno', 'InstructorController@allalumno');
+    Route::get('instructor/{id}/show','InstructorController@showInstructor');
+    Route::get('{id}/show','InstructorController@showalumno');
+    Route::post('instructor/nuevo','InstructorController@store_instructor');
+    Route::post('alumno/nuevo','InstructorController@store_alumno');
+    Route::get('alumno/nuevo/archivo','InstructorController@import_alumno_archivo');//store_alumno_archivo
+});
+
 Route::get('/admin/instructor', 'InstructorController@allinstructor');//muetra los datos del alumno
 Route::get('/admin/alumno', 'InstructorController@allalumno');
 Route::get('/admin/instructor/{id}/show','InstructorController@showInstructor');
 Route::get('/admin/alumno/{id}/show','InstructorController@showalumno');
+
 Route::post('/admin/instructor/nuevo','InstructorController@store_instructor');
 Route::post('/admin/alumno/nuevo','InstructorController@store_alumno');
-Route::post('/admin/alumno/nuevo/archivo','InstructorController@store_alumno_archivo');//store_alumno_archivo
+
+Route::get('/admin/alumno/nuevo/archivo','InstructorController@import_alumno_archivo');//store_alumno_archivo
 
 ///
 Route::get('/admin/laboratorio/nuevo','laboratorioController@crear');

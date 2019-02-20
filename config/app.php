@@ -174,6 +174,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+       // Collective\Html\HtmlServiceProvider::class,     //add
+        //Maatwebsite\Excel\ExcelServiceProvider::class,  //add
 
     ],
 
@@ -223,6 +225,12 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        //'Excel'     => 'Maatwebsite\Excel\ExcelServiceProvider',
+       
+       // 'Form' => Collective\Html\FormFacade::class,        //add
+        //'Html' => Collective\Html\HtmlFacade::class,          //add
+        //'Excel' => Maatwebsite\Excel\Facades\Excel::class,  //add
+
 
     ],
 
