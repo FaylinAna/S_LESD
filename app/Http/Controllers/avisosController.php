@@ -56,6 +56,41 @@ class avisosController extends Controller
     }
 
 
+    public function update(Request $request,$id)
+    {
+            $data=$request->all();
+        
+            Aviso::create([
+            'nombre' => $data['titulo'],
+            'descripcion' => $data['descripcion'],
+            'fecha' => Carbon::now()->toDateString()
+            ]);
+            foreach( $request->file('Documentos') as $file){
+                $file->move(
+                      base_path() . '/public/documentos',$file->getClientOriginalName()
+                  ); 
+                  archivos_aviso::create([
+                      'id_aviso'=>$data->id,
+                      'nombre'=>(string)$file->getClientOriginalName()
+                  ]);
+              }
+              foreach( $request->file('Imagen') as $file){
+                $file->move(
+                      base_path() . '/public/documentos',$file->getClientOriginalName()
+                  ); 
+                  foto_aviso::create([
+                      'id_aviso'=>$data->id,
+                      'nombre'=>(string)$file->getClientOriginalName()
+                  ]);
+              }
+
+              return -back()
+              ->with('msj','se guardo correctamente');
+       
+    }
+
+
+
 
     public function destroy(Request $request,$id)
     {
