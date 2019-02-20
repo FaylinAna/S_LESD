@@ -22,7 +22,7 @@ class InstructorController extends Controller
 
     public function showInstructor($id)
     {
-        return $instructor=Instructor::findOrFail($id)->append('is_admin')->toArray();
+        return $instructor=Instructor::findOrFail($id);//->append('is_admin')->toArray();
     }
 
     public function showAlumno($id)
@@ -73,12 +73,14 @@ class InstructorController extends Controller
     public function update_instructor(Request $request, Instructor $instructor)
     {
         $instructor->update($request->all());
-        return response()->json($instructor);
+        return -back()
+              ->with('msj','se guardo correctamente');
     }
     public function update_alumno(Request $request, Alumno $alumno)
     {
         $alumno->update($request->all());
-        return response()->json($alumno);
+        return -back()
+        ->with('msj','se guardo correctamente');
     }
 
     public function delete_instructor(Instructor $instructor)
