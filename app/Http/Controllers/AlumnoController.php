@@ -11,19 +11,17 @@ class AlumnoController extends Controller
 
     public function show_Alumno($id)
     {
-        return $alumno=Alumno::findOrFail($id);
+        return $alumno = Alumno::findOrFail($id);
     }
     //actualizar perfil
     public function update_alumno(Request $request, Alumno $alumno)
     {
         $alumno->update($request->all());
-        return response()->json($alumno);
+        return response()->json($alumno,'se actualizo correctamente el registro');
     }
 
-    public function show_Alumno($id)
-    {
-        return $alumno=Alumno::findOrFail($id);
-    }
+
+   
 
 
 

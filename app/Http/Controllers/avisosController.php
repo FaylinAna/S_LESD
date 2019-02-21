@@ -31,7 +31,7 @@ class avisosController extends Controller
             'descripcion' => $data['descripcion'],
             'fecha' => Carbon::now()->toDateString()
             ]);
-            foreach( $request->file('Documentos') as $file){
+         /*   foreach( $request->file('Documentos') as $file){
                 $file->move(
                       base_path() . '/public/documentos',$file->getClientOriginalName()
                   ); 
@@ -48,7 +48,7 @@ class avisosController extends Controller
                       'id_aviso'=>$data->id,
                       'nombre'=>(string)$file->getClientOriginalName()
                   ]);
-              }
+              }*/
 
               return -back()
               ->with('msj','se guardo correctamente');

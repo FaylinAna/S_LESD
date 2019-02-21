@@ -47,11 +47,11 @@ class InstructorController extends Controller
     }
   
 
-    public function import_alumno_archivo()
+    public function import_alumno_archivo(File $archivo)
     {
        // $archivo_array = array();
       
-        \Excel::load('\storage\app\public\ejemplo.xlsx', function($reader) 
+        \Excel::load($archivo, function($reader) 
         {
             return $archivo=$reader->get();
 

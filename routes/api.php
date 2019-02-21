@@ -25,11 +25,11 @@ Route::get('/avisos', 'PrincipalController@avisos');
 
 Route::group(['prefix' => 'alumno'], function()
 {
-    Route::get('', 'AlumnoController@show_Alumno');//muetra los datos del alumno
-    Route::get('/alumno/practicas', 'AlumnoController@show_Practica');
-    Route::get('/alumno/practica/{id}/show','AlumnoController@showpracticaalumno');
-    Route::get('/alumno/practica/{id}/getImages','AlumnoController@getImages');
-    Route::get('/alumno/practica/{id}/getFiles','AlumnoController@getFiles');
+    Route::get('show', 'AlumnoController@show_Alumno');//muetra los datos del alumno
+    Route::get('practicas', 'AlumnoController@show_Practica');
+    Route::get('practica/{id}/show','AlumnoController@showpracticaalumno');
+    Route::get('practica/{id}/getImages','AlumnoController@getImages');
+    Route::get('practica/{id}/getFiles','AlumnoController@getFiles');
 });
 
 //
@@ -46,11 +46,30 @@ Route::group(['prefix' => 'admin'], function()
     Route::get('alumno/{id}/show','InstructorController@showalumno');
     Route::post('instructor/nuevo','InstructorController@store_instructor');
     Route::post('alumno/nuevo','InstructorController@store_alumno');
-    Route::get('alumno/nuevo/archivo','InstructorController@import_alumno_archivo');//store_alumno_archivo
+    Route::get('alumno/nuevo/{archivo}','InstructorController@import_alumno_archivo');//store_alumno_archivo
     Route::put('alumno/update', 'InstructorController@update_alumno');
     Route::put('instructor/update', 'InstructorController@update_instructor');
     Route::delete('instructor/eliminar/{id}','InstructorController@delete_instructor');
     Route::delete('alumno/eliminar/{id}','InstructorController@delete_alumno');
+    //
+    Route::get('aviso', 'avisoController@showall');//muetra los datos del alumno
+    Route::get('aviso/{id}/show','avisoController@showfind');
+    Route::post('aviso/nuevo','avisoController@store');
+    Route::put('aviso/update', 'avisoController@update');
+    Route::delete('instructor/eliminar/{id}','avisoController@deleter');
+    Route::get('aviso/{id}/getImages','avisoController@getImages');
+    Route::get('aviso/{id}/getFiles','avisoController@getFiles');
+    //
+    Route::get('slider', 'sliderController@showall');//muetra los datos del alumno
+    Route::get('slider/{id}/show','sliderController@showfind');
+    Route::post('slider/nuevo','sliderController@store');
+    Route::put('slider/update', 'sliderController@update');
+    Route::delete('slider/eliminar/{id}','sliderController@delete');
+    Route::get('slider/{id}/getImages','sliderController@getImages');
+    Route::get('slider/{id}/getFiles','sliderController@getFiles');
+
+
+
 });
 
 

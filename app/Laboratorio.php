@@ -24,4 +24,6 @@ class Laboratorio extends Model
         
 
     }
+
+  
 }

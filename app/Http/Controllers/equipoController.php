@@ -2,20 +2,24 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
-use App\archivo_slider;
-use App\foto_slider;
-use App\slider;
+use App\archivo_equipo;
+use App\foto_equipo;
+use App\EquipoLaboratorio;
 
-class sliderController extends Controller
+
+
+class equipoController extends Controller
 {
+    //
+
     public function showall()
     {
-        return slider::all();
+        return EquipoLaboratorio::all();
     }
 
     public function showfind($id)
     {
-        return $slider = slider::findOrFail($id);
+        return $equipo = EquipoLaboratorio::findOrFail($id);
     }
 
 
@@ -23,15 +27,16 @@ class sliderController extends Controller
     {
             $data=$request->all();
         
-            slider::create([
+            EquipoLaboratorio::create([
             'nombre' => $data['nombre'],
+            'descripcion' => $data['descripcion'],
             ]);
             foreach( $request->file('Documentos') as $file){
                 $file->move(
                       base_path() . '/public/documentos',$file->getClientOriginalName()
                   ); 
-                  archivos_slider::create([
-                      'id_slider'=>$data->id,
+                  archivos_equipo::create([
+                      'id_equipo'=>$data->id,
                       'nombre'=>(string)$file->getClientOriginalName()
                   ]);
               }
@@ -39,8 +44,8 @@ class sliderController extends Controller
                 $file->move(
                       base_path() . '/public/documentos',$file->getClientOriginalName()
                   ); 
-                  foto_slider::create([
-                      'id_slider'=>$data->id,
+                  foto_equipo::create([
+                      'id_equipo'=>$data->id,
                       'nombre'=>(string)$file->getClientOriginalName()
                   ]);
               }
@@ -51,21 +56,22 @@ class sliderController extends Controller
     }
     public function getImages($id)
     {
-        return foto_slider::where('id_slider',$id)->get();
+        return foto_equipo::where('id_equipo',$id)->get();
     }
 
     public function getFiles($id)
     {
-        return archivos_slider::where('id_slider',$id)->get();
+        return archivos_equipo::where('id_equipo',$id)->get();
     }
 
     public function update(Request $request,$id)
     {
           
-            $slider = slider::find($id);
+            $equipo = EquipoLaboratorio::find($id);
 
-            $slider->nombre = $request->get('nombre');
-            $slider->save();
+            $equipo->nombre = $request->get('nombre');
+            $equipo->descripcion = $request->get('descripcion');
+            $equipo->save();
 
             if($request->hasfile('Documentos'))
             {
@@ -73,8 +79,8 @@ class sliderController extends Controller
                     $file->move(
                         base_path() . '/public/documentos',$file->getClientOriginalName()
                     ); 
-                    archivos_slider::create([
-                        'id_slider'=>$data->id,
+                    archivos_equipo::create([
+                        'id_equipo'=>$data->id,
                         'nombre'=>(string)$file->getClientOriginalName()
                     ]);
                 }
@@ -85,8 +91,8 @@ class sliderController extends Controller
                     $file->move(
                         base_path() . '/public/documentos',$file->getClientOriginalName()
                     ); 
-                    foto_slider::create([
-                        'id_slider'=>$data->id,
+                    foto_equipo::create([
+                        'id_equipo'=>$data->id,
                         'nombre'=>(string)$file->getClientOriginalName()
                     ]);
                 }
@@ -104,13 +110,13 @@ class sliderController extends Controller
     public function destroy(Request $request,$id)
     {
       
-      $slider = slider::find($id);
-      $F = foto_slider::where('id_slider',$id)->get();
-      $A = archivos_slider::where('id_slider',$id)->get();
+      $equipo = EquipoLaboratorio::find($id);
+      $F = foto_equipo::where('id_equipo',$id)->get();
+      $A = archivos_equipo::where('id_equipo',$id)->get();
 
       Storage::delete('/public/documentos/'.$A->nombre);//verificar nobre de archivo
       Storage::delete('/public/documentos/'.$F->nombre);
-      $slider->delete();
+      $equipo->delete();
       $A->delete();
       $F->delete();
 
