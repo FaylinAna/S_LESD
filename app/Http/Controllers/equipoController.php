@@ -31,28 +31,25 @@ class equipoController extends Controller
             'nombre' => $data['nombre'],
             'descripcion' => $data['descripcion'],
             ]);
-            foreach( $request->file('Documentos') as $file){
-                $file->move(
-                      base_path() . '/public/documentos',$file->getClientOriginalName()
-                  ); 
-                  archivos_equipo::create([
-                      'id_equipo'=>$data->id,
-                      'nombre'=>(string)$file->getClientOriginalName()
-                  ]);
-              }
-              foreach( $request->file('Imagen') as $file){
-                $file->move(
-                      base_path() . '/public/documentos',$file->getClientOriginalName()
-                  ); 
-                  foto_equipo::create([
-                      'id_equipo'=>$data->id,
-                      'nombre'=>(string)$file->getClientOriginalName()
-                  ]);
-              }
+           
 
               return -back()
               ->with('msj','se guardo correctamente');
        
+    }
+
+    public function store_file(Request $request)
+    {
+        foreach( $request->file('archivos') as $file){
+            $file->move(
+                  base_path() . '/public/archivos',$file->getClientOriginalName()
+              ); 
+              archivos_equipo::create([
+                  'id_equipo'=>$data->id,
+                  'nombre'=>(string)$file->getClientOriginalName()
+              ]);
+          }
+        
     }
     public function getImages($id)
     {

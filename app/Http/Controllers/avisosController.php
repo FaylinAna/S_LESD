@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Redirect;
 
 class avisosController extends Controller
 {
-    public function showall()
+   /* public function showall()
     {
         return Aviso::all();
     }
@@ -31,38 +31,28 @@ class avisosController extends Controller
             'descripcion' => $data['descripcion'],
             'fecha' => Carbon::now()->toDateString()
             ]);
-         /*   foreach( $request->file('Documentos') as $file){
-                $file->move(
-                      base_path() . '/public/documentos',$file->getClientOriginalName()
-                  ); 
-                  archivos_aviso::create([
-                      'id_aviso'=>$data->id,
-                      'nombre'=>(string)$file->getClientOriginalName()
-                  ]);
-              }
-              foreach( $request->file('Imagen') as $file){
-                $file->move(
-                      base_path() . '/public/documentos',$file->getClientOriginalName()
-                  ); 
-                  foto_aviso::create([
-                      'id_aviso'=>$data->id,
-                      'nombre'=>(string)$file->getClientOriginalName()
-                  ]);
-              }*/
 
               return -back()
               ->with('msj','se guardo correctamente');
        
     }
-    public function getImages($id)
+
+    public function store_docuemnts(Request $request)
     {
-        return foto_aviso::where('id_aviso',$id)->get();
+        foreach( $request->file('archivos') as $file)
+        {
+            $file->move(
+                  base_path() . '/public/archivos',$file->getClientOriginalName()
+              ); 
+              foto_aviso::create([
+                  'id_aviso'=>$data->id,
+                  'nombre'=>(string)$file->getClientOriginalName()
+              ]);
+
     }
 
-    public function getFiles($id)
-    {
-        return archivos_aviso::where('id_aviso',$id)->get();
-    }
+   
+  
 
     public function update(Request $request,$id)
     {
@@ -126,7 +116,7 @@ class avisosController extends Controller
               ->with('msj','se elimino correctamente');
    
       
-    }
+    }*/
     
 
 

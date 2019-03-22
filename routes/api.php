@@ -57,7 +57,7 @@ Route::group(['prefix' => 'admin'], function()
     Route::post('aviso/nuevo','avisoController@store');
     Route::put('aviso/update', 'avisoController@update');
     Route::delete('instructor/eliminar/{id}','avisoController@deleter');
-    Route::get('aviso/{id}/getImages','avisoController@getImages');
+    Route::get('aviso/{id}/ge tImages','avisoController@getImages');
     Route::get('aviso/{id}/getFiles','avisoController@getFiles');
     //
     Route::get('slider', 'sliderController@showall');//muetra los datos del alumno
@@ -67,6 +67,14 @@ Route::group(['prefix' => 'admin'], function()
     Route::delete('slider/eliminar/{id}','sliderController@delete');
     Route::get('slider/{id}/getImages','sliderController@getImages');
     Route::get('slider/{id}/getFiles','sliderController@getFiles');
+
+    Route::get('equipo', 'equipoController@showall');//muetra los datos del alumno
+    Route::get('equipo/{id}/show','equipoController@showfind');
+    Route::post('equipo/nuevo','equipoController@store');
+    Route::put('equipo/update', 'equipoController@update');
+    Route::delete('equipo/eliminar/{id}','equipoController@delete');
+    Route::get('equipo/{id}/getImages','equipoController@getImages');
+    Route::get('equipo/{id}/getFiles','equipoController@getFiles');
 
 
 

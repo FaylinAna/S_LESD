@@ -26,28 +26,37 @@ class sliderController extends Controller
             slider::create([
             'nombre' => $data['nombre'],
             ]);
-            foreach( $request->file('Documentos') as $file){
-                $file->move(
-                      base_path() . '/public/documentos',$file->getClientOriginalName()
-                  ); 
-                  archivos_slider::create([
-                      'id_slider'=>$data->id,
-                      'nombre'=>(string)$file->getClientOriginalName()
-                  ]);
-              }
-              foreach( $request->file('Imagen') as $file){
-                $file->move(
-                      base_path() . '/public/documentos',$file->getClientOriginalName()
-                  ); 
-                  foto_slider::create([
-                      'id_slider'=>$data->id,
-                      'nombre'=>(string)$file->getClientOriginalName()
-                  ]);
-              }
+            
 
               return -back()
               ->with('msj','se guardo correctamente');
        
+    }
+    public function store_file(Request $request)
+    {
+        foreach( $request->file('file') as $file){
+            $file->move(
+                  base_path() . '/public/documentos',$file->getClientOriginalName()
+              ); 
+              foto_slider::create([
+                  'id_slider'=>$data->id,
+                  'nombre'=>(string)$file->getClientOriginalName()
+              ]);
+          }
+        
+    }
+
+    public function store_archivo(Request $request)
+    {
+        foreach( $request->file('Documentos') as $file){
+            $file->move(
+                  base_path() . '/public/documentos',$file->getClientOriginalName()
+              ); 
+              archivos_slider::create([
+                  'id_slider'=>$data->id,
+                  'nombre'=>(string)$file->getClientOriginalName()
+              ]);
+          }
     }
     public function getImages($id)
     {

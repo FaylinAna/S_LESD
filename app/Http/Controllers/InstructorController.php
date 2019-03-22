@@ -41,8 +41,6 @@ class InstructorController extends Controller
     {
         $alumno = Alumno::create($request->all());
         return response()->json('Se agrego correctamente');
-
-
         //agregar el crear usuario 
     }
   
