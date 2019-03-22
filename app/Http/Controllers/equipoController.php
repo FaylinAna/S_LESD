@@ -51,6 +51,20 @@ class equipoController extends Controller
           }
         
     }
+
+    public function store_imagen(Request $request)
+    {
+        foreach( $request->file('archivos') as $file){
+            $file->move(
+                  base_path() . '/public/archivos',$file->getClientOriginalName()
+              ); 
+              foto_equipo::create([
+                  'id_equipo'=>$data->id,
+                  'nombre'=>(string)$file->getClientOriginalName()
+              ]);
+          }
+        
+    }
     public function getImages($id)
     {
         return foto_equipo::where('id_equipo',$id)->get();

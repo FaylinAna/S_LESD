@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Redirect;
 
 class avisosController extends Controller
 {
-   /* public function showall()
+    public function showall()
     {
         return Aviso::all();
     }
@@ -37,6 +37,7 @@ class avisosController extends Controller
        
     }
 
+
     public function store_docuemnts(Request $request)
     {
         foreach( $request->file('archivos') as $file)
@@ -48,6 +49,40 @@ class avisosController extends Controller
                   'id_aviso'=>$data->id,
                   'nombre'=>(string)$file->getClientOriginalName()
               ]);
+        }
+
+    }
+    
+
+  
+
+    /*
+   public function store_docuemnts(Request $request)
+    {
+        foreach( $request->file('archivos') as $file)
+        {
+            $file->move(
+                  base_path() . '/public/archivos',$file->getClientOriginalName()
+              ); 
+              foto_aviso::create([
+                  'id_aviso'=>$data->id,
+                  'nombre'=>(string)$file->getClientOriginalName()
+              ]);
+        }
+
+    }
+    public function store_docuemnts(Request $request)
+    {
+        foreach( $request->file('archivos') as $file)
+        {
+            $file->move(
+                  base_path() . '/public/archivos',$file->getClientOriginalName()
+              ); 
+              foto_aviso::create([
+                  'id_aviso'=>$data->id,
+                  'nombre'=>(string)$file->getClientOriginalName()
+              ]);
+        }
 
     }
 

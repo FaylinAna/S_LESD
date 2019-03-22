@@ -52,15 +52,18 @@ Route::group(['prefix' => 'admin'], function()
     Route::delete('instructor/eliminar/{id}','InstructorController@delete_instructor');
     Route::delete('alumno/eliminar/{id}','InstructorController@delete_alumno');
     //
-    Route::get('aviso', 'avisoController@showall');//muetra los datos del alumno
+    Route::get('aviso', 'avisoController@showall');
     Route::get('aviso/{id}/show','avisoController@showfind');
     Route::post('aviso/nuevo','avisoController@store');
     Route::put('aviso/update', 'avisoController@update');
     Route::delete('instructor/eliminar/{id}','avisoController@deleter');
-    Route::get('aviso/{id}/ge tImages','avisoController@getImages');
+    Route::get('aviso/{id}/getImages','avisoController@getImages');
     Route::get('aviso/{id}/getFiles','avisoController@getFiles');
+    Route::post('aviso/nuevo/imagen','avisoController@store_file');
+    Route::post('aviso/nuevo/imagen','avisoController@store_imagen');
     //
-    Route::get('slider', 'sliderController@showall');//muetra los datos del alumno
+
+    Route::get('slider', 'sliderController@showall');
     Route::get('slider/{id}/show','sliderController@showfind');
     Route::post('slider/nuevo','sliderController@store');
     Route::put('slider/update', 'sliderController@update');
@@ -68,7 +71,7 @@ Route::group(['prefix' => 'admin'], function()
     Route::get('slider/{id}/getImages','sliderController@getImages');
     Route::get('slider/{id}/getFiles','sliderController@getFiles');
 
-    Route::get('equipo', 'equipoController@showall');//muetra los datos del alumno
+    Route::get('equipo', 'equipoController@showall');
     Route::get('equipo/{id}/show','equipoController@showfind');
     Route::post('equipo/nuevo','equipoController@store');
     Route::put('equipo/update', 'equipoController@update');
