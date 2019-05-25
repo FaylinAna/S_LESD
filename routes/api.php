@@ -40,7 +40,7 @@ Route::group(['prefix' => 'admin'], function()
     Route::get('Config', 'HomeController@allConfiguracion');
     Route::put('Congif/update', 'HomeController@update_Configuracion');
     //
-    Route::get('instructor', 'InstructorController@allinstructor');//muetra los datos del alumno
+    Route::get('instructor', 'InstructorController@allinstructor');
     Route::get('alumno', 'InstructorController@allalumno');
     Route::get('instructor/{id}/show','InstructorController@showInstructor');
     Route::get('alumno/{id}/show','InstructorController@showalumno');
@@ -52,15 +52,15 @@ Route::group(['prefix' => 'admin'], function()
     Route::delete('instructor/eliminar/{id}','InstructorController@delete_instructor');
     Route::delete('alumno/eliminar/{id}','InstructorController@delete_alumno');
     //
-    Route::get('aviso', 'avisoController@showall');
-    Route::get('aviso/{id}/show','avisoController@showfind');
-    Route::post('aviso/nuevo','avisoController@store');
-    Route::put('aviso/update', 'avisoController@update');
-    Route::delete('instructor/eliminar/{id}','avisoController@deleter');
-    Route::get('aviso/{id}/getImages','avisoController@getImages');
-    Route::get('aviso/{id}/getFiles','avisoController@getFiles');
-    Route::post('aviso/nuevo/imagen','avisoController@store_file');
-    Route::post('aviso/nuevo/imagen','avisoController@store_imagen');
+    Route::get('aviso','avisosController@showall');
+    Route::get('aviso/{id}/show','avisosController@showfind');
+    Route::post('aviso/nuevo','avisosController@store');
+    Route::put('aviso/update/{id}', 'avisosController@update');
+    Route::delete('aviso/eliminar/{id}','avisosController@destroy');
+    Route::get('aviso/{id}/getImages','avisosController@getImages');
+    Route::get('aviso/{id}/getFiles','avisosController@getFiles');
+    Route::post('aviso/nuevo/imagen','avisosController@store_files');
+    Route::post('aviso/nuevo/imagen','avisosController@store_imagens');
     //
 
     Route::get('slider', 'sliderController@showall');
@@ -74,11 +74,20 @@ Route::group(['prefix' => 'admin'], function()
     Route::get('equipo', 'equipoController@showall');
     Route::get('equipo/{id}/show','equipoController@showfind');
     Route::post('equipo/nuevo','equipoController@store');
-    Route::put('equipo/update', 'equipoController@update');
-    Route::delete('equipo/eliminar/{id}','equipoController@delete');
+    Route::post('equipo/nuevo/file','equipoController@store_file');
+    Route::put('equipo/update/{id}', 'equipoController@update');
+    Route::delete('equipo/eliminar/{id}','equipoController@destroy');
     Route::get('equipo/{id}/getImages','equipoController@getImages');
     Route::get('equipo/{id}/getFiles','equipoController@getFiles');
 
+    Route::get('Laboratorio', 'laboratorioController@showall');
+    Route::get('Laboratorio/{id}/show','laboratorioController@showfind');
+    Route::post('Laboratorio/nuevo','laboratorioController@store');
+    Route::post('Laboratorio/nuevo/file','laboratorioController@store_file');
+    Route::put('Laboratorio/update/{id}', 'laboratorioController@update');
+    Route::delete('Laboratorio/eliminar/{id}','laboratorioController@destroy');
+    Route::get('Laboratorio/{id}/getImages','laboratorioController@getImages');
+    Route::get('Laboratorio/{id}/getFiles','laboratorioController@getFiles');
 
 
 });

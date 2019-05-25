@@ -8,7 +8,7 @@ class Aviso extends Model
 {
     //
 
-    use Notifiable;
+   // use Notifiable;
     protected $table = 'Aviso';
 
     protected $fillable = [

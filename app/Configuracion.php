@@ -12,4 +12,5 @@ class Configuracion extends Model
     protected $fillable = [
         'vision', 'mision', 'responsable','horario','logo',
     ];
+    
 }

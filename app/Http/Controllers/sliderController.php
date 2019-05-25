@@ -23,13 +23,10 @@ class sliderController extends Controller
     {
             $data=$request->all();
         
-            slider::create([
+            return slider::create([
             'nombre' => $data['nombre'],
             ]);
             
-
-              return -back()
-              ->with('msj','se guardo correctamente');
        
     }
     public function store_file(Request $request)
@@ -76,7 +73,7 @@ class sliderController extends Controller
             $slider->nombre = $request->get('nombre');
             $slider->save();
 
-            if($request->hasfile('Documentos'))
+      /*      if($request->hasfile('Documentos'))
             {
                 foreach( $request->file('Documentos') as $file){
                     $file->move(
@@ -99,10 +96,9 @@ class sliderController extends Controller
                         'nombre'=>(string)$file->getClientOriginalName()
                     ]);
                 }
-            }
+            }*/
 
-              return -back()
-              ->with('msj','se guardo correctamente');
+          
        
     }
 
@@ -114,17 +110,16 @@ class sliderController extends Controller
     {
       
       $slider = slider::find($id);
-      $F = foto_slider::where('id_slider',$id)->get();
-      $A = archivos_slider::where('id_slider',$id)->get();
+     // $F = foto_slider::where('id_slider',$id)->get();
+      //$A = archivos_slider::where('id_slider',$id)->get();
 
-      Storage::delete('/public/documentos/'.$A->nombre);//verificar nobre de archivo
-      Storage::delete('/public/documentos/'.$F->nombre);
+      //Storage::delete('/public/documentos/'.$A->nombre);//verificar nobre de archivo
+      //Storage::delete('/public/documentos/'.$F->nombre);
       $slider->delete();
-      $A->delete();
-      $F->delete();
+      //$A->delete();
+      //$F->delete();
 
-      return -back()
-              ->with('msj','se elimino correctamente');
+   
    
       
     }

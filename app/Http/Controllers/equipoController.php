@@ -1,7 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+//use App\Http\Requests\UploadReque;
+use Illuminate\Http\Request\UploadRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\archivo_equipo;
 use App\foto_equipo;
 use App\EquipoLaboratorio;
@@ -27,24 +30,24 @@ class equipoController extends Controller
     {
             $data=$request->all();
         
-            EquipoLaboratorio::create([
+            return   EquipoLaboratorio::create([
             'nombre' => $data['nombre'],
             'descripcion' => $data['descripcion'],
             ]);
-           
-
-              return -back()
-              ->with('msj','se guardo correctamente');
-       
+               
     }
-
+    
     public function store_file(Request $request)
     {
+       // return 
+       return $request->all();
         foreach( $request->file('archivos') as $file){
-            $file->move(
+        return "aaa";
+        return $file->getClientOriginalName();
+            $request->move(
                   base_path() . '/public/archivos',$file->getClientOriginalName()
               ); 
-              archivos_equipo::create([
+              archivo_equipo::create([
                   'id_equipo'=>$data->id,
                   'nombre'=>(string)$file->getClientOriginalName()
               ]);
@@ -84,7 +87,7 @@ class equipoController extends Controller
             $equipo->descripcion = $request->get('descripcion');
             $equipo->save();
 
-            if($request->hasfile('Documentos'))
+       /*     if($request->hasfile('Documentos'))
             {
                 foreach( $request->file('Documentos') as $file){
                     $file->move(
@@ -107,33 +110,22 @@ class equipoController extends Controller
                         'nombre'=>(string)$file->getClientOriginalName()
                     ]);
                 }
-            }
+            }*/
 
-              return -back()
-              ->with('msj','se guardo correctamente');
        
     }
-
-
-
-
 
     public function destroy(Request $request,$id)
     {
       
       $equipo = EquipoLaboratorio::find($id);
-      $F = foto_equipo::where('id_equipo',$id)->get();
-      $A = archivos_equipo::where('id_equipo',$id)->get();
+     // $F = foto_equipo::where('id_equipo',$id)->get();
+      //$A = archivos_equipo::where('id_equipo',$id)->get();
 
-      Storage::delete('/public/documentos/'.$A->nombre);//verificar nobre de archivo
-      Storage::delete('/public/documentos/'.$F->nombre);
+      //Storage::delete('/public/documentos/'.$A->nombre);//verificar nobre de archivo
+      //Storage::delete('/public/documentos/'.$F->nombre);
       $equipo->delete();
-      $A->delete();
-      $F->delete();
-
-      return -back()
-              ->with('msj','se elimino correctamente');
-   
-      
+      //$A->delete();
+      //$F->delete(); 
     }
 }
